@@ -1,6 +1,5 @@
 package com.example.w2_2.controller;
-
-
+/* 하나의 Todo 상세보기 */
 import com.example.w2_2.dto.TodoDTO;
 import com.example.w2_2.service.TodoService;
 import jakarta.servlet.ServletException;
@@ -17,17 +16,18 @@ import java.io.IOException;
 @Log4j2
 public class TodoReadController extends HttpServlet {
 
-    private TodoService todoService = TodoService.INSTANCE;
+    private TodoService todoService = TodoService.INSTANCE; // TodoService 사용할 준비
 
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
         throws ServletException, IOException {
 
         try {
             Long tno = Long.parseLong(req.getParameter("tno"));
+            // 2번 목록 누름 -> url: /todo/read?tno=2 -> ():2 -> Long.parseLong("2") = 2L로 숫자로 바꿈
 
-            TodoDTO todoDTO = todoService.get(tno);
+            TodoDTO todoDTO = todoService.get(tno); // 최종적으로 DB에서 온 tno=2L인 데이터가 Controller로 전달, todoDTO에 저장
 
-            // 모델 담기
+            // req에 todoDTO 담기
             req.setAttribute("dto", todoDTO);
 
             // 쿠키 찾기
@@ -54,7 +54,8 @@ public class TodoReadController extends HttpServlet {
             }
 
             req.getRequestDispatcher("/WEB-INF/todo/read.jsp")
-                    .forward(req, resp);
+                    .forward(req, resp); // 하나의 Todo 페이지로 이동
+
         } catch (Exception e) {
             log.error(e.getMessage());
             throw new ServletException("read error");

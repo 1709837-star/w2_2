@@ -14,16 +14,18 @@ import java.io.IOException;
 @Log4j2
 public class LogoutController extends HttpServlet {
 
+    // 사용자가 post /logout 요청 -> LogoutController ->
+    // -> "loginInfo" 삭제 -> Session 자체 삭제 -> /로 이동
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
 
         log.info("log out.................");
 
-        HttpSession session = req.getSession();
+        HttpSession session = req.getSession(); // Session 가져오기
 
-        session.removeAttribute("loginInfo");
-        session.invalidate();
+        session.removeAttribute("loginInfo"); // 세션에서 "loginInfo" 삭제하기
+        session.invalidate(); // 세션 자체를 확실하게 종료
 
         resp.sendRedirect("/");
     }

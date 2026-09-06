@@ -1,5 +1,5 @@
 package com.example.w2_2.controller;
-
+/* 삭제 버튼 */
 import com.example.w2_2.service.TodoService;
 import lombok.extern.log4j.Log4j2;
 
@@ -21,6 +21,8 @@ public class TodoRemoveController extends HttpServlet {
             throws ServletException, IOException {
 
         Long tno = Long.parseLong(req.getParameter("tno"));
+        // 3번 목록 누름 -> url: /todo/remove?tno=3 -> ():3 -> Long.parseLong("3") = 3L로 숫자로 바꿈
+
         log.info("tno: " + tno);
 
         try {
