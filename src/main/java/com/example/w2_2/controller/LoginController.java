@@ -11,6 +11,7 @@ import lombok.extern.log4j.Log4j2;
 import java.io.IOException;
 import java.util.UUID;
 
+
 @WebServlet("/login") // ★ 사용자가 (/login) 요청 -> 이 class(LoginController) 실행하라는 뜻
 @Log4j2
 public class LoginController extends HttpServlet {
